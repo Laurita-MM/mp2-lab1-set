@@ -144,12 +144,21 @@ TSet TSet::operator~(void) // дополнение
 
 istream& operator>>(istream& istr, TSet& s) // ввод
 {
-	istr >> s.BitField;
+	int a;
+	istr >> a;
+	while (a >= 0) istr >> a;
 	return istr;
 }
 
 ostream& operator<<(ostream& ostr, const TSet& s) // вывод
 {
-	ostr << s.BitField;
+	ostr << "{";
+	for (int i = 0; i < s.MaxPower; i++) {
+		if (s.IsMember(i)) {
+			ostr << i;
+			if (i != s.MaxPower - 1) ostr << ", ";
+		}
+	}
+	ostr << "}" << endl;
 	return ostr;
 }
